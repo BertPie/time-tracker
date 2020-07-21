@@ -18,6 +18,9 @@ public class CategoryToCreate {
     }
 
     public Category toCategory() {
-        return new Category(code, name, description);
+        return new Category(
+                code.trim(),
+                name.trim(),
+                description.trim());
     }
 }
