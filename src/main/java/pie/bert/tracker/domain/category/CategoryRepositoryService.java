@@ -15,7 +15,19 @@ public interface CategoryRepositoryService {
      */
     Category create(Category category) throws CategoryCodeAlreadyExistsException;
 
+    /**
+     * Finds all categories and returns unmodifiable {@link Collection}. If none categories are found, returns
+     * an empty collection.
+     *
+     * @return unmodifiable collection
+     */
     Collection<Category> findAll();
 
+    /**
+     * Finds category by provided category code.
+     *
+     * @param code unique for the category
+     * @return either optional with found category or empty optional
+     */
     Optional<Category> findByCode(String code);
 }
