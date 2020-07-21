@@ -14,6 +14,7 @@ import pie.bert.tracker.domain.category.Category;
 import pie.bert.tracker.domain.category.CategoryCodeAlreadyExistsException;
 import pie.bert.tracker.domain.category.CategoryDomainService;
 import pie.bert.tracker.domain.category.CategoryNotFoundException;
+import pie.bert.tracker.domain.category.CategoryValidationException;
 import pie.bert.tracker.view.ErrorResponse;
 
 import java.util.List;
@@ -64,6 +65,12 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CategoryNotFoundException.class)
     public ErrorResponse categoryNotFoundException(CategoryNotFoundException e) {
+        return new ErrorResponse(e);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CategoryValidationException.class)
+    public ErrorResponse categoryValidationException(CategoryValidationException e) {
         return new ErrorResponse(e);
     }
 }

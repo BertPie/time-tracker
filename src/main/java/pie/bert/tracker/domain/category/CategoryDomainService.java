@@ -9,10 +9,12 @@ import java.util.Collection;
 public class CategoryDomainService {
 
     private final CategoryRepositoryService categoryRepositoryService;
+    private final CategoryValidator categoryValidator;
 
     @Autowired
-    public CategoryDomainService(CategoryRepositoryService categoryRepositoryService) {
+    public CategoryDomainService(CategoryRepositoryService categoryRepositoryService, CategoryValidator categoryValidator) {
         this.categoryRepositoryService = categoryRepositoryService;
+        this.categoryValidator = categoryValidator;
     }
 
     /**
@@ -21,8 +23,10 @@ public class CategoryDomainService {
      * @param category to be saved
      * @return saved category
      * @throws CategoryCodeAlreadyExistsException if code already exists in repository
+     * @throws CategoryValidationException        if provided fields are not valid
      */
-    public Category create(Category category) throws CategoryCodeAlreadyExistsException {
+    public Category create(Category category) throws CategoryCodeAlreadyExistsException, CategoryValidationException {
+        categoryValidator.validate(category);
         return categoryRepositoryService.create(category);
     }
 
