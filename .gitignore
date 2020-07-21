@@ -1,0 +1,12 @@
+# maven
+target
+
+# IntelliJ
+.idea
+*.iml
+
+# Linux
+*.swp
+
+# Local files
+.local
