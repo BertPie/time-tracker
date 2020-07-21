@@ -7,7 +7,7 @@ import pie.bert.tracker.domain.category.Category;
 public class CategoryViewMapper {
 
     public CategoryView toView(Category category) {
-        String url = Mapping.CATEGORY.replace(PathVariable.CATEGORY_CODE_BRACKETS, category.getCode());
+        String url = Mapping.CATEGORY.replace(PathVar.CATEGORY_CODE_BRACKETS, category.getCode());
         return new CategoryView(category, url);
     }
 }

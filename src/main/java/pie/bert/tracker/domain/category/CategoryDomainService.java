@@ -22,4 +22,9 @@ public class CategoryDomainService {
     public Collection<Category> findAll() {
         return categoryRepositoryService.findAll();
     }
+
+    public Category findByCode(String code) throws CategoryNotFoundException {
+        return categoryRepositoryService.findByCode(code)
+                .orElseThrow(() -> new CategoryNotFoundException("Could not find category with code: " + code));
+    }
 }

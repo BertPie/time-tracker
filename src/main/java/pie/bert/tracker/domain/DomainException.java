@@ -2,7 +2,8 @@ package pie.bert.tracker.domain;
 
 public class DomainException extends RuntimeException {
 
-    public static final String CATEGORY_ALREADY_EXISTS = "CAT_0001";
+    protected static final String CATEGORY_ALREADY_EXISTS = "CAT_0001";
+    protected static final String CATEGORY_NOT_FOUND = "CAT_0002";
 
     private final String code;
 

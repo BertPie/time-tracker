@@ -1,15 +1,15 @@
 package pie.bert.tracker.view.category;
 
-public class PathVariable {
+public class PathVar {
 
     public static final String CATEGORY_CODE = "categoryCode";
-    public static final String CATEGORY_CODE_BRACKETS = brackets(CATEGORY_CODE);
+    public static final String CATEGORY_CODE_BRACKETS = "{categoryCode}";
 
     private static String brackets(String pathVariable) {
         return "{" + pathVariable + "}";
     }
 
-    private PathVariable() {
+    private PathVar() {
         // private to prevent instantiation
     }
 }
