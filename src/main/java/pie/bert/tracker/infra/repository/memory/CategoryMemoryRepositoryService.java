@@ -1,7 +1,6 @@
 package pie.bert.tracker.infra.repository.memory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import pie.bert.tracker.domain.category.Category;
 import pie.bert.tracker.domain.category.CategoryCodeAlreadyExistsException;
 import pie.bert.tracker.domain.category.CategoryRepositoryService;
@@ -10,7 +9,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-@Service
 public class CategoryMemoryRepositoryService implements CategoryRepositoryService {
 
     private final CategoryMemoryRepository categoryMemoryRepository;
