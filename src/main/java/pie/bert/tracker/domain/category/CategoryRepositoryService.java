@@ -7,13 +7,13 @@ public interface CategoryRepositoryService {
 
     /**
      * Creates a new category and stores it in a repository. Creation of category with the same {@code code}
-     * is not allowed, will result in throwing {@link IllegalArgumentException}.
+     * is not allowed, will result in throwing {@link CategoryCodeAlreadyExistsException}.
      *
      * @param category to be saved
      * @return newly saved category
-     * @throws IllegalArgumentException if category with a given code already exists
+     * @throws CategoryCodeAlreadyExistsException if category with a given code already exists
      */
-    Category create(Category category) throws IllegalArgumentException;
+    Category create(Category category) throws CategoryCodeAlreadyExistsException;
 
     Collection<Category> findAll();
 

@@ -3,6 +3,7 @@ package pie.bert.tracker.infra.repository.memory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pie.bert.tracker.domain.category.Category;
+import pie.bert.tracker.domain.category.CategoryCodeAlreadyExistsException;
 import pie.bert.tracker.domain.category.CategoryRepositoryService;
 
 import java.util.Collection;
@@ -22,11 +23,11 @@ public class CategoryMemoryRepositoryService implements CategoryRepositoryServic
     @Override
     public Category create(Category category) {
         return categoryMemoryRepository.save(category)
-                .orElseThrow(alreadyContainsException(category.getCode()));
+                .orElseThrow(categoryCodeAlreadyExistsException(category.getCode()));
     }
 
-    private Supplier<IllegalArgumentException> alreadyContainsException(String code) {
-        return () -> new IllegalArgumentException("Repository already contains category with code: " + code);
+    private Supplier<CategoryCodeAlreadyExistsException> categoryCodeAlreadyExistsException(String code) {
+        return () -> new CategoryCodeAlreadyExistsException("Repository already contains category with code: " + code);
     }
 
     @Override

@@ -15,8 +15,7 @@ public class CategoryDomainService {
         this.categoryRepositoryService = categoryRepositoryService;
     }
 
-    public Category create(Category category) {
-        // todo: validation
+    public Category create(Category category) throws CategoryCodeAlreadyExistsException {
         return categoryRepositoryService.create(category);
     }
 

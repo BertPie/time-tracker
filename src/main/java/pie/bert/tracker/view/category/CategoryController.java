@@ -2,6 +2,7 @@ package pie.bert.tracker.view.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pie.bert.tracker.domain.category.Category;
+import pie.bert.tracker.domain.category.CategoryCodeAlreadyExistsException;
 import pie.bert.tracker.domain.category.CategoryDomainService;
+import pie.bert.tracker.view.ErrorResponse;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +42,14 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryView createCategory(@RequestBody @Valid CategoryToCreate categoryToCreate) {
+    public CategoryView createCategory(@RequestBody CategoryToCreate categoryToCreate) {
         Category created = categoryDomainService.create(categoryToCreate.toCategory());
         return categoryViewMapper.toView(created);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(CategoryCodeAlreadyExistsException.class)
+    public ErrorResponse categoryCodeAlreadyExistsException(CategoryCodeAlreadyExistsException e) {
+        return new ErrorResponse(e);
     }
 }
