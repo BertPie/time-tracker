@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class CategoryRepository {
+public class CategoryMemoryRepository {
 
     private final Map<String, Category> categories;
 
-    public CategoryRepository() {
+    public CategoryMemoryRepository() {
         this.categories = new HashMap<>();
     }
 

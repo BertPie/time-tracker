@@ -12,16 +12,16 @@ import java.util.function.Supplier;
 @Service
 public class CategoryMemoryRepositoryService implements CategoryRepositoryService {
 
-    private final CategoryRepository categoryRepository;
+    private final CategoryMemoryRepository categoryMemoryRepository;
 
     @Autowired
-    public CategoryMemoryRepositoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CategoryMemoryRepositoryService(CategoryMemoryRepository categoryMemoryRepository) {
+        this.categoryMemoryRepository = categoryMemoryRepository;
     }
 
     @Override
     public Category create(Category category) {
-        return categoryRepository.save(category)
+        return categoryMemoryRepository.save(category)
                 .orElseThrow(alreadyContainsException(category.getCode()));
     }
 
@@ -31,11 +31,11 @@ public class CategoryMemoryRepositoryService implements CategoryRepositoryServic
 
     @Override
     public Collection<Category> findAll() {
-        return categoryRepository.findAll();
+        return categoryMemoryRepository.findAll();
     }
 
     @Override
     public Optional<Category> findByCode(String code) {
-        return categoryRepository.findByCode(code);
+        return categoryMemoryRepository.findByCode(code);
     }
 }
