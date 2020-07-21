@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pie.bert.tracker.domain.DomainValidator;
 
+import java.util.Objects;
+
 @Component
 class CategoryValidator {
 
@@ -17,6 +19,7 @@ class CategoryValidator {
     }
 
     void validate(Category category) throws CategoryValidationException {
+        Objects.requireNonNull(category);
         validateCode(category.getCode());
         validateName(category.getName());
         validateDescription(category.getDescription());
