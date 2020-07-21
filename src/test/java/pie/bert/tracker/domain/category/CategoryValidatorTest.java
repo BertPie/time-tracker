@@ -3,10 +3,15 @@ package pie.bert.tracker.domain.category;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
+import pie.bert.tracker.domain.DomainException;
 import pie.bert.tracker.domain.DomainValidator;
+
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
@@ -26,6 +31,7 @@ public class CategoryValidatorTest {
     private static final int MAX_NAME_LENGTH = 4;
     private static final int MIN_DESC_LENGTH = 5;
     private static final int MAX_DESC_LENGTH = 6;
+    private static final ArgumentMatcher<Supplier<DomainException>> THROWS_EXCEPTION_WITH_CODE_CAT_0003 = exceptionSupplier -> exceptionSupplier.get().getCode().equals("CAT_0003");
 
     private DomainValidator domainValidatorMock;
     private CategoryValues categoryValuesMock;
@@ -99,13 +105,13 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .fieldCannotBeNull(eq(CODE), any());
+                .fieldCannotBeNull(eq(CODE), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .fieldCannotBeNull(eq(NAME), any());
+                .fieldCannotBeNull(eq(NAME), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .fieldCannotBeNull(eq(DESC), any());
+                .fieldCannotBeNull(eq(DESC), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
     }
 
     @Test
@@ -119,13 +125,13 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeLongerThan(eq(CODE), eq(MAX_CODE_LENGTH), any());
+                .stringCannotBeLongerThan(eq(CODE), eq(MAX_CODE_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeLongerThan(eq(NAME), eq(MAX_NAME_LENGTH), any());
+                .stringCannotBeLongerThan(eq(NAME), eq(MAX_NAME_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeLongerThan(eq(DESC), eq(MAX_DESC_LENGTH), any());
+                .stringCannotBeLongerThan(eq(DESC), eq(MAX_DESC_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(categoryValuesMock)
                 .should(times(1))
                 .getMaxCodeLength();
@@ -148,13 +154,13 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeShorterThan(eq(CODE), eq(MIN_CODE_LENGTH), any());
+                .stringCannotBeShorterThan(eq(CODE), eq(MIN_CODE_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeShorterThan(eq(NAME), eq(MIN_NAME_LENGTH), any());
+                .stringCannotBeShorterThan(eq(NAME), eq(MIN_NAME_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(domainValidatorMock)
                 .should(times(1))
-                .stringCannotBeShorterThan(eq(DESC), eq(MIN_DESC_LENGTH), any());
+                .stringCannotBeShorterThan(eq(DESC), eq(MIN_DESC_LENGTH), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
         then(categoryValuesMock)
                 .should(times(1))
                 .getMinCodeLength();
@@ -177,7 +183,7 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .stringHasToBeAlphabetic(eq(CODE), any());
+                .stringHasToBeAlphabetic(eq(CODE), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
     }
 
     @Test
@@ -191,7 +197,7 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .stringHasToBeAlphaNumericWithSpacesBetween(eq(NAME), any());
+                .stringHasToBeAlphaNumericWithSpacesBetween(eq(NAME), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
     }
 
     @Test
@@ -205,6 +211,6 @@ public class CategoryValidatorTest {
         // then
         then(domainValidatorMock)
                 .should(times(1))
-                .stringHasToBeLikeSentence(eq(DESC), any());
+                .stringHasToBeLikeSentence(eq(DESC), argThat(THROWS_EXCEPTION_WITH_CODE_CAT_0003));
     }
 }
