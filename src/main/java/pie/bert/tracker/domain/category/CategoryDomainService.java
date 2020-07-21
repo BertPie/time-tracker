@@ -10,15 +10,20 @@ public class CategoryDomainService {
 
     private final CategoryRepositoryService categoryRepositoryService;
     private final CategoryValidator categoryValidator;
+    private final CategoryNormalizer categoryNormalizer;
 
     @Autowired
-    public CategoryDomainService(CategoryRepositoryService categoryRepositoryService, CategoryValidator categoryValidator) {
+    public CategoryDomainService(CategoryRepositoryService categoryRepositoryService,
+                                 CategoryValidator categoryValidator,
+                                 CategoryNormalizer categoryNormalizer) {
         this.categoryRepositoryService = categoryRepositoryService;
         this.categoryValidator = categoryValidator;
+        this.categoryNormalizer = categoryNormalizer;
     }
 
     /**
-     * Saves provided category in repository if the category code is not present, otherwise throws an exception.
+     * Validates provided category, if valid - normalizes it, and then saves it in repository.
+     * If the category code is already present in repository throws an exception and does not save the category.
      *
      * @param category to be saved
      * @return saved category
@@ -27,7 +32,8 @@ public class CategoryDomainService {
      */
     public Category create(Category category) throws CategoryCodeAlreadyExistsException, CategoryValidationException {
         categoryValidator.validate(category);
-        return categoryRepositoryService.create(category);
+        Category normalized = categoryNormalizer.normalize(category);
+        return categoryRepositoryService.create(normalized);
     }
 
     /**
