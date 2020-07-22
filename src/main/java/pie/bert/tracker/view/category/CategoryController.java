@@ -16,6 +16,8 @@ import pie.bert.tracker.domain.category.CategoryDomainService;
 import pie.bert.tracker.domain.category.CategoryNotFoundException;
 import pie.bert.tracker.domain.category.CategoryValidationException;
 import pie.bert.tracker.view.ErrorResponse;
+import pie.bert.tracker.view.Mapping;
+import pie.bert.tracker.view.PathVar;
 
 import java.util.List;
 import java.util.stream.Collectors;

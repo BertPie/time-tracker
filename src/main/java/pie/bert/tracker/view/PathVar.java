@@ -1,4 +1,4 @@
-package pie.bert.tracker.view.category;
+package pie.bert.tracker.view;
 
 public class PathVar {
 
