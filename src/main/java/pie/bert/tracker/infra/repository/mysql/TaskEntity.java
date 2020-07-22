@@ -8,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tasks")
@@ -74,5 +75,28 @@ public class TaskEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "taskPk=" + taskPk +
+                ", start=" + start +
+                ", end=" + end +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaskEntity)) return false;
+        TaskEntity that = (TaskEntity) o;
+        return Objects.equals(getTaskPk(), that.getTaskPk());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTaskPk());
     }
 }

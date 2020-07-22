@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class TaskPk implements Serializable {
@@ -38,5 +39,27 @@ public class TaskPk implements Serializable {
 
     public void setTaskId(Integer taskId) {
         this.taskId = taskId;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskPk{" +
+                "categoryEntity=" + categoryEntity +
+                ", taskId=" + taskId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaskPk)) return false;
+        TaskPk taskPk = (TaskPk) o;
+        return Objects.equals(getCategoryEntity(), taskPk.getCategoryEntity()) &&
+                Objects.equals(getTaskId(), taskPk.getTaskId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCategoryEntity(), getTaskId());
     }
 }
