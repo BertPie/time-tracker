@@ -1,10 +1,14 @@
-pie.bert.tracker.domain.category:
-  maxCodeLength: 3
-  minCodeLength: 2
-  maxNameLength: 120
-  minNameLength: 3
-  maxDescriptionLength: 1000
-  minDescriptionLength: 0
+pie.bert.tracker:
+  domain.category:
+    maxCodeLength: 3
+    minCodeLength: 2
+    maxNameLength: 120
+    minNameLength: 3
+    maxDescriptionLength: 1000
+    minDescriptionLength: 0
+  view.task:
+    dataTimeFormat: "yyyy-MM-dd HH:mm"
+    digitsInTaskViewId: 4
 
 spring:
   jpa:
