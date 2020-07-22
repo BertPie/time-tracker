@@ -31,7 +31,8 @@ public class CategoryValidatorTest {
     private static final int MAX_NAME_LENGTH = 4;
     private static final int MIN_DESC_LENGTH = 5;
     private static final int MAX_DESC_LENGTH = 6;
-    private static final ArgumentMatcher<Supplier<DomainException>> THROWS_EXCEPTION_WITH_CODE_CAT_0003 = exceptionSupplier -> exceptionSupplier.get().getCode().equals("CAT_0003");
+    private static final ArgumentMatcher<Supplier<DomainException>> THROWS_EXCEPTION_WITH_CODE_CAT_0003
+            = exceptionSupplier -> exceptionSupplier.get().getCode().equals("CAT_0003");
 
     private DomainValidator domainValidatorMock;
     private CategoryValues categoryValuesMock;
