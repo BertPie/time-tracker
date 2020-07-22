@@ -4,6 +4,10 @@ Application for tracking time spent on tasks.
 ## Table of Contents
 0. [Table of Contents](#table-of-contents)
 0. [Aim of the Project](#aim-of-the-project)
+0. [Start up](#start-up)
+    * [Requirements](#requirements)
+    * [Configure DB](#configure-db)
+    * [Run Application](#run-application)
 0. [Manual Testing](#manual-testing)
 
 ## Aim of the Project
@@ -38,6 +42,45 @@ happens via REST controllers, console or any other means should not require any 
 Some concepts of Clean Architecture may cause some repetition that maybe considered unnecessary. The aim of this project
 is to test which parts of the concept have to be taken as is, what is actually necessary and what is just
 "art for the art's sake". One of the ways to accomplish that is changing data sources.
+
+## Start up
+
+### Requirements
+To start the application you need to have properly setup Java 14 and MySql database.
+
+### Configure DB
+To run the application, first you need to have a running MySql database. You can either start it in a docker container
+or set it up manually. 
+
+#### Run Docker script
+There is a ready bash script to run a docker container under following path:
+```
+{project dir}/.start-up-scripts/database/start-my-sql.sh
+``` 
+Script can also be run manually:  
+```
+docker run -d -p 3306:3306 --name mysql-tasker-db \
+   	-e MYSQL_ROOT_PASSWORD=pass1234 \
+   	-e MYSQL_DATABASE=tasker \
+   	mysql
+```
+
+#### Setup Database Manually
+You can also setup MySql database yourself with following credentials:
+
+|||
+|----------|----------|
+| username | root     |
+| password | pass1234 |
+| schema   | tasker   |
+| port     | 3306     |
+
+### Run Application
+To run application go to project directory and run following script:
+```
+./mvnw spring-boot:run
+``` 
+**NOTE:** You need to have database running.
 
 ## Manual Testing
 For manual testing see `.postman` catalog and import collections to Postman Application.
