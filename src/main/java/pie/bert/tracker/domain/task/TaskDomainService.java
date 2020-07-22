@@ -3,6 +3,8 @@ package pie.bert.tracker.domain.task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class TaskDomainService {
 
@@ -16,5 +18,9 @@ public class TaskDomainService {
     public Task create(TaskUnsaved taskUnsaved) {
         // todo: validate start > end
         return repositoryService.create(taskUnsaved);
+    }
+
+    public Collection<Task> findAll() {
+        return repositoryService.findAll();
     }
 }

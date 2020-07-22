@@ -6,8 +6,11 @@ import pie.bert.tracker.domain.task.Task;
 import pie.bert.tracker.domain.task.TaskRepositoryService;
 import pie.bert.tracker.domain.task.TaskUnsaved;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class TaskMySqlRepositoryService implements TaskRepositoryService {
@@ -37,5 +40,12 @@ public class TaskMySqlRepositoryService implements TaskRepositoryService {
             TaskEntity taskEntity = new TaskEntity(opt.get(), nextId, taskUnsaved);
             return taskMySqlRepository.save(taskEntity).toTask();
         }
+    }
+
+    @Override
+    public Collection<Task> findAll() {
+        return StreamSupport.stream(taskMySqlRepository.findAll().spliterator(), false)
+                .map(TaskEntity::toTask)
+                .collect(Collectors.toList());
     }
 }
