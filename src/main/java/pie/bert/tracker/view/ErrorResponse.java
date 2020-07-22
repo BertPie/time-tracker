@@ -13,4 +13,14 @@ public class ErrorResponse {
         this.errorCode = e.getCode();
         this.message = e.getMessage();
     }
+
+    public ErrorResponse(ViewException e) {
+        this.errorCode = e.getCode();
+        this.message = e.getMessage();
+    }
+
+    public ErrorResponse(String errorCode, String message) {
+        this.errorCode = errorCode;
+        this.message = message;
+    }
 }
