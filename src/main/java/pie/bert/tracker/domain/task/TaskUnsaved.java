@@ -16,6 +16,22 @@ public class TaskUnsaved {
         this.description = description;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
