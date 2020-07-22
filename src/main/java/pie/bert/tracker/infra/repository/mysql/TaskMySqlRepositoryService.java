@@ -16,7 +16,6 @@ import java.util.stream.StreamSupport;
 @Service
 public class TaskMySqlRepositoryService implements TaskRepositoryService {
 
-    // todo: use database to store counter
     private final AtomicInteger naiveNextId;
 
     private final CategoryMySqlRepository categoryMySqlRepository;
