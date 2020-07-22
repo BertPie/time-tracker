@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import pie.bert.tracker.domain.task.CategoryNotFoundException;
 import pie.bert.tracker.domain.task.Task;
 import pie.bert.tracker.domain.task.TaskDomainService;
 import pie.bert.tracker.domain.task.TaskUnsaved;
@@ -45,5 +46,11 @@ public class TaskController {
         return new ErrorResponse(
                 ViewError.WRONG_DATE_TIME_FORMAT,
                 "Wrong format of following date time " + e.getParsedString());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ErrorResponse categoryNotFoundException(CategoryNotFoundException e) {
+        return new ErrorResponse(e);
     }
 }
