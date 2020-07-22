@@ -5,8 +5,9 @@ Application for tracking time spent on tasks.
 0. [Table of Contents](#table-of-contents)
 0. [Aim of the Project](#aim-of-the-project)
 0. [Start up](#start-up)
-   * [Configure DB](#configure-db)
-   * [Run Application](#run-application)
+    * [Requirements](#requirements)
+    * [Configure DB](#configure-db)
+    * [Run Application](#run-application)
 0. [Manual Testing](#manual-testing)
 
 ## Aim of the Project
@@ -43,6 +44,9 @@ is to test which parts of the concept have to be taken as is, what is actually n
 "art for the art's sake". One of the ways to accomplish that is changing data sources.
 
 ## Start up
+
+### Requirements
+To start the application you need to have properly setup Java 14 and MySql database.
 
 ### Configure DB
 To run the application, first you need to have a running MySql database. You can either start it in a docker container
