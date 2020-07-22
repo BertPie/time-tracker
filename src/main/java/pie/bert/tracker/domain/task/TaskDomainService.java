@@ -23,4 +23,10 @@ public class TaskDomainService {
     public Collection<Task> findAll() {
         return repositoryService.findAll();
     }
+
+    public Task findByTaskIdentity(TaskIdentity taskIdentity) throws TaskNotFoundException {
+        return repositoryService.findByTaskIdentity(taskIdentity)
+                .orElseThrow(() -> new TaskNotFoundException(
+                        "Could not find task for " + taskIdentity.toHumanReadable()));
+    }
 }

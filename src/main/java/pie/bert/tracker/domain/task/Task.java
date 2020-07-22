@@ -5,26 +5,20 @@ import java.util.Objects;
 
 public class Task {
 
-    private final String category;
-    private final int taskId;
+    private final TaskIdentity taskIdentity;
     private final LocalDateTime start;
     private final LocalDateTime end;
     private final String description;
 
     public Task(String category, int taskId, LocalDateTime start, LocalDateTime end, String description) {
-        this.category = category;
-        this.taskId = taskId;
+        this.taskIdentity = new TaskIdentity(category, taskId);
         this.start = start;
         this.end = end;
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public int getTaskId() {
-        return taskId;
+    public TaskIdentity getTaskIdentity() {
+        return taskIdentity;
     }
 
     public LocalDateTime getStart() {
@@ -42,8 +36,7 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "category='" + category + '\'' +
-                ", taskId=" + taskId +
+                "taskIdentity=" + taskIdentity +
                 ", start=" + start +
                 ", end=" + end +
                 ", description='" + description + '\'' +
@@ -55,15 +48,11 @@ public class Task {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
-        return taskId == task.taskId &&
-                Objects.equals(category, task.category) &&
-                Objects.equals(start, task.start) &&
-                Objects.equals(end, task.end) &&
-                Objects.equals(description, task.description);
+        return getTaskIdentity().equals(task.getTaskIdentity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, taskId, start, end, description);
+        return Objects.hash(getTaskIdentity());
     }
 }

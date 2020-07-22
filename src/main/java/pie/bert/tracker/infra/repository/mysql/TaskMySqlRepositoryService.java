@@ -3,6 +3,7 @@ package pie.bert.tracker.infra.repository.mysql;
 import org.springframework.stereotype.Service;
 import pie.bert.tracker.domain.task.CategoryNotFoundException;
 import pie.bert.tracker.domain.task.Task;
+import pie.bert.tracker.domain.task.TaskIdentity;
 import pie.bert.tracker.domain.task.TaskRepositoryService;
 import pie.bert.tracker.domain.task.TaskUnsaved;
 
@@ -47,5 +48,19 @@ public class TaskMySqlRepositoryService implements TaskRepositoryService {
         return StreamSupport.stream(taskMySqlRepository.findAll().spliterator(), false)
                 .map(TaskEntity::toTask)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Task> findByTaskIdentity(TaskIdentity taskIdentity) {
+        String category = taskIdentity.getCategory();
+        boolean categoryDoesNotExist = !categoryMySqlRepository.existsById(category);
+        if (categoryDoesNotExist) {
+            throw new CategoryNotFoundException("Could not find category with code " + category + " for new task");
+        } else {
+            Optional<CategoryEntity> opt = categoryMySqlRepository.findById(category);
+            TaskPk taskPk = new TaskPk(opt.get(), taskIdentity.getTaskId());
+            return taskMySqlRepository.findById(taskPk)
+                    .map(TaskEntity::toTask);
+        }
     }
 }
