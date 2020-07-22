@@ -8,6 +8,7 @@ Application for tracking time spent on tasks.
     * [Requirements](#requirements)
     * [Configure DB](#configure-db)
     * [Run Application](#run-application)
+0. [RESTful API](#restful-api)
 0. [Manual Testing](#manual-testing)
 
 ## Aim of the Project
@@ -81,6 +82,121 @@ To run application go to project directory and run following script:
 ./mvnw spring-boot:run
 ``` 
 **NOTE:** You need to have database running.
+
+## RESTful API
+The communication with sever is done via HTTP protocol. Some information is stored as path variables some in body
+as JSON. More information can be found below and in `.postman` catalog the a repository, where example requests are
+stored.
+
+### Category
+Category is used to group tasks together. Consists of following fields:
+
+|Field      |Type      |
+|-----------|----------|
+|code       | String   |
+|name       | String   |
+|description| String   |
+
+#### Creation
+
+##### Request
+| Request    |                           |
+|------------|---------------------------|
+| url        | localhost:8080/categories |
+| method     | POST                      |
+
+```json
+
+{
+  "code" : "CAT",
+  "name" : "Category",
+  "description" : "Description"
+}
+```
+
+##### Response
+```json
+{
+    "code": "CAT",
+    "name": "Category",
+    "description": "Description",
+    "url": "/categories/CAT"
+}
+```
+
+##### Status Codes
+|Code|Name       |Type                                               |
+|----|-----------|---------------------------------------------------|
+|201 |CREATED    | When creation was successful                      |
+|409 |CONFLICT   | When code already exists in repository            |
+|400 |BAD_REQUEST| When category to be saved contains invalid fields |
+
+
+#### Finding All
+
+##### Request
+| Request    |                           |
+|------------|---------------------------|
+| url        | localhost:8080/categories |
+| method     | GET                       |
+
+
+##### Response
+```json
+[
+    {
+        "code": "CAS",
+        "name": "Casegory",
+        "description": "Description",
+        "url": "/categories/CAS"
+    },
+    {
+        "code": "CAT",
+        "name": "Category",
+        "description": "Description",
+        "url": "/categories/CAT"
+    }
+]
+```
+
+##### Status Codes
+|Code|Name       |Type                                               |
+|----|-----------|---------------------------------------------------|
+|200 |OK         | When creation was successful                      |
+
+#### Finding Single Category by Code
+
+##### Request
+| Request    |                                        |
+|------------|----------------------------------------|
+| url        | localhost:8080/categories/{code}       |
+| method     | GET                                    |
+| {code}     | path param for unique code of category |
+
+##### Response
+```json
+{
+  "code": "CAT",
+  "name": "Category",
+  "description": "Description",
+  "url": "/categories/CAT"
+}
+```
+
+##### Status Codes
+|Code|Name       |Type                         |
+|----|-----------|-----------------------------|
+|200 |OK         | When category was found     |
+|404 |NOT_FOUND  | When category was not found |
+|400 |BAD_REQUEST| When code param is invalid  |
+
+### Task
+
+#### Creation
+
+#### Finding All
+
+#### Finding Single Task by Task Identity
 
 ## Manual Testing
 For manual testing see `.postman` catalog and import collections to Postman Application.
