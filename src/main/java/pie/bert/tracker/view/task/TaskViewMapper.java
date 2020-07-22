@@ -16,15 +16,15 @@ import java.util.regex.Pattern;
 @Component
 public class TaskViewMapper {
 
-    private final TaskValues taskValues;
+    private final TaskViewValues taskViewValues;
     private final DateTimeFormatter formatter;
     private final Pattern taskViewIdPattern;
 
     @Autowired
-    public TaskViewMapper(TaskValues taskValues) {
-        this.taskValues = taskValues;
-        this.formatter = DateTimeFormatter.ofPattern(taskValues.getDataTimeFormat());
-        this.taskViewIdPattern = compileTaskViewIdPattern(taskValues.getDigitsInTaskViewId());
+    public TaskViewMapper(TaskViewValues taskViewValues) {
+        this.taskViewValues = taskViewValues;
+        this.formatter = DateTimeFormatter.ofPattern(taskViewValues.getDataTimeFormat());
+        this.taskViewIdPattern = compileTaskViewIdPattern(taskViewValues.getDigitsInTaskViewId());
     }
 
     private Pattern compileTaskViewIdPattern(int digitsInTaskViewId) {
@@ -59,7 +59,7 @@ public class TaskViewMapper {
     }
 
     private String parseTaskViewId(String category, int taskId) {
-        String format = String.format("%%0%dd", taskValues.getDigitsInTaskViewId());
+        String format = String.format("%%0%dd", taskViewValues.getDigitsInTaskViewId());
         return category + "-" + String.format(format, taskId);
     }
 

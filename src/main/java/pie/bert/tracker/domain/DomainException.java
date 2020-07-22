@@ -7,6 +7,7 @@ public class DomainException extends RuntimeException {
     protected static final String CATEGORY_NOT_VALID = "CAT_0003";
 
     protected static final String TASK_NOT_FOUND = "TSK_0001";
+    protected static final String TASK_NOT_VALID = "TSK_0002";
 
     private final String code;
 

@@ -16,6 +16,7 @@ import pie.bert.tracker.domain.task.TaskDomainService;
 import pie.bert.tracker.domain.task.TaskIdentity;
 import pie.bert.tracker.domain.task.TaskNotFoundException;
 import pie.bert.tracker.domain.task.TaskUnsaved;
+import pie.bert.tracker.domain.task.TaskValidationException;
 import pie.bert.tracker.view.ErrorResponse;
 import pie.bert.tracker.view.Mapping;
 import pie.bert.tracker.view.PathVar;
@@ -74,6 +75,12 @@ public class TaskController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(TaskIdentityNotValidException.class)
     public ErrorResponse wrongDataFormat(TaskIdentityNotValidException e) {
+        return new ErrorResponse(e);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(TaskValidationException.class)
+    public ErrorResponse taskValidationException(TaskValidationException e) {
         return new ErrorResponse(e);
     }
 

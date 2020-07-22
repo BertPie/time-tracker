@@ -7,13 +7,13 @@ import pie.bert.tracker.domain.DomainValidator;
 import java.util.Objects;
 
 @Component
-class CategoryValidator {
+public class CategoryValidator {
 
     private final DomainValidator domainValidator;
     private final CategoryValues categoryValues;
 
     @Autowired
-    CategoryValidator(DomainValidator domainValidator, CategoryValues categoryValues) {
+    public CategoryValidator(DomainValidator domainValidator, CategoryValues categoryValues) {
         this.domainValidator = domainValidator;
         this.categoryValues = categoryValues;
     }
@@ -25,7 +25,7 @@ class CategoryValidator {
         validateDescription(category.getDescription());
     }
 
-    private void validateCode(String code) throws CategoryValidationException {
+    public void validateCode(String code) throws CategoryValidationException {
         domainValidator.fieldCannotBeNull(code, () ->
                 new CategoryValidationException("Category Code cannot be null"));
 

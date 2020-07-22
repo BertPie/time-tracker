@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "pie.bert.tracker.view.task")
-public class TaskValues {
+public class TaskViewValues {
     private String dataTimeFormat;
     private int digitsInTaskViewId;
 
-    public TaskValues() {
+    public TaskViewValues() {
         // empty
     }
 

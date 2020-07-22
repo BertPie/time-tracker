@@ -9,14 +9,16 @@ import java.util.Collection;
 public class TaskDomainService {
 
     private final TaskRepositoryService repositoryService;
+    private final TaskValidator taskValidator;
 
     @Autowired
-    public TaskDomainService(TaskRepositoryService repositoryService) {
+    public TaskDomainService(TaskRepositoryService repositoryService, TaskValidator taskValidator) {
         this.repositoryService = repositoryService;
+        this.taskValidator = taskValidator;
     }
 
     public Task create(TaskUnsaved taskUnsaved) {
-        // todo: validate start > end
+        taskValidator.validate(taskUnsaved);
         return repositoryService.create(taskUnsaved);
     }
 
